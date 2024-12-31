@@ -25,5 +25,5 @@ def home(request):
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin panel
     path('', home, name='home'),      # Homepage
-    path('ws/', include('drawing-board.urls')),  # Include WebSocket routes from drawing-board
+    path('ws/', include('drawing_board.urls')),  # Include WebSocket routes from drawing_board app
 ]

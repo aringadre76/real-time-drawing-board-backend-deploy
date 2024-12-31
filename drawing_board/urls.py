@@ -1,6 +1,7 @@
 from django.urls import path
 from . import consumers
 
-websocket_urlpatterns = [
-    path('ws/drawing/', consumers.DrawingConsumer.as_asgi()),  # WebSocket endpoint
+# Django requires `urlpatterns` for URL routing
+urlpatterns = [
+    path('drawing/', consumers.DrawingConsumer.as_asgi()),  # WebSocket endpoint
 ]
