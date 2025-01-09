@@ -21,7 +21,10 @@ class DrawingConsumer(AsyncWebsocketConsumer):
             data = json.loads(text_data)
             x = data.get("x")
             y = data.get("y")
+            prevX = data.get("prevX")  # Add previous X coordinate
+            prevY = data.get("prevY")  # Add previous Y coordinate
             action = data.get("action")
+            clientId = data.get("clientId")  # Add clientId
 
             # Handle disconnect test
             if action == "disconnect_test":
@@ -42,7 +45,10 @@ class DrawingConsumer(AsyncWebsocketConsumer):
                     "type": "broadcast_drawing",
                     "x": x,
                     "y": y,
+                    "prevX": prevX,  # Include previous coordinates
+                    "prevY": prevY,
                     "action": action,
+                    "clientId": clientId,  # Include clientId
                 }
             )
         except json.JSONDecodeError:
@@ -54,5 +60,8 @@ class DrawingConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             "x": event["x"],
             "y": event["y"],
+            "prevX": event["prevX"],  # Include previous coordinates
+            "prevY": event["prevY"],
             "action": event["action"],
+            "clientId": event["clientId"],  # Include clientId
         }))
